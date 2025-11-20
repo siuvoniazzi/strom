@@ -8,7 +8,6 @@ export const calculateSolarStats = (data, config) => {
     let totalOwnerConsumption = 0;
     let totalNeighborConsumption = 0;
 
-    let totalSelfConsumed = 0;
     let totalSoldToNeighbor = 0;
     let totalSoldToGrid = 0;
     let totalBoughtFromGridOwner = 0;
@@ -39,7 +38,6 @@ export const calculateSolarStats = (data, config) => {
             production: 0,
             ownerUsage: 0,
             neighborUsage: 0,
-            selfConsumed: 0,
             soldToNeighbor: 0,
             soldToGrid: 0,
             boughtFromGridOwner: 0,
@@ -59,27 +57,26 @@ export const calculateSolarStats = (data, config) => {
             dailyStats.ownerUsage += o;
             dailyStats.neighborUsage += n;
 
-            // 1. Solar -> Owner
-            const selfConsumed = Math.min(p, o);
-            const remP = p - selfConsumed;
-            const remO = o - selfConsumed;
+            // Note: Meters are positioned AFTER self-consumption
+            // Production meter = excess solar after owner has consumed
+            // Owner meter = additional power from grid when solar isn't enough
+            // Neighbor meter = neighbor's consumption
 
-            // 2. Solar -> Neighbor
-            const soldToNeighbor = Math.min(remP, n);
-            const remP2 = remP - soldToNeighbor;
+            // 1. Solar -> Neighbor (from excess production)
+            const soldToNeighbor = Math.min(p, n);
+            const remP = p - soldToNeighbor;
             const remN = n - soldToNeighbor;
 
-            // 3. Solar -> Grid
-            const soldToGrid = remP2;
+            // 2. Solar -> Grid (remaining excess)
+            const soldToGrid = remP;
 
-            // 4. Grid -> Owner
-            const boughtFromGridOwner = remO;
+            // 3. Grid -> Owner (owner's metered usage)
+            const boughtFromGridOwner = o;
 
-            // 5. Grid -> Neighbor
+            // 4. Grid -> Neighbor (when solar isn't enough)
             const boughtFromGridNeighbor = remN;
 
             // Accumulate daily
-            dailyStats.selfConsumed += selfConsumed;
             dailyStats.soldToNeighbor += soldToNeighbor;
             dailyStats.soldToGrid += soldToGrid;
             dailyStats.boughtFromGridOwner += boughtFromGridOwner;
@@ -88,15 +85,15 @@ export const calculateSolarStats = (data, config) => {
 
         // Calculate financials for the day
         // Revenue for Owner: (Sold to Neighbor * Price A) + (Sold to Grid * Price B)
-        // Savings for Owner: Self Consumed * Price C (Avoided cost)
         // Cost for Owner: Bought from Grid * Price C
         // Cost for Neighbor: (Sold to Neighbor * Price A) + (Bought from Grid * Price C)
+        // Note: Actual self-consumption savings are unmeasured (happen before meter)
 
         const revenueFromNeighbor = dailyStats.soldToNeighbor * config.priceA;
         const revenueFromGrid = dailyStats.soldToGrid * config.priceB;
 
         dailyStats.revenue = revenueFromNeighbor + revenueFromGrid;
-        dailyStats.savings = dailyStats.selfConsumed * config.priceC;
+        dailyStats.savings = 0; // Unmeasured - happens before meter
         dailyStats.costOwner = dailyStats.boughtFromGridOwner * config.priceC;
         dailyStats.costNeighbor = revenueFromNeighbor + (dailyStats.boughtFromGridNeighbor * config.priceC);
 
@@ -106,7 +103,6 @@ export const calculateSolarStats = (data, config) => {
         totalProduction += dailyStats.production;
         totalOwnerConsumption += dailyStats.ownerUsage;
         totalNeighborConsumption += dailyStats.neighborUsage;
-        totalSelfConsumed += dailyStats.selfConsumed;
         totalSoldToNeighbor += dailyStats.soldToNeighbor;
         totalSoldToGrid += dailyStats.soldToGrid;
         totalBoughtFromGridOwner += dailyStats.boughtFromGridOwner;
@@ -119,7 +115,6 @@ export const calculateSolarStats = (data, config) => {
             production: totalProduction,
             ownerUsage: totalOwnerConsumption,
             neighborUsage: totalNeighborConsumption,
-            selfConsumed: totalSelfConsumed,
             soldToNeighbor: totalSoldToNeighbor,
             soldToGrid: totalSoldToGrid,
             boughtFromGridOwner: totalBoughtFromGridOwner,

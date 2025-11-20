@@ -91,7 +91,6 @@ export const Dashboard = ({ results }) => {
                             <tr>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('date')}</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('production')}</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('selfConsumed')}</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('toNeighbor')}</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('toGrid')}</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('revenue')}</th>
@@ -102,7 +101,6 @@ export const Dashboard = ({ results }) => {
                                 <tr key={idx} className="hover:bg-gray-50">
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{day.date}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{day.production.toFixed(2)}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{day.selfConsumed.toFixed(2)}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{day.soldToNeighbor.toFixed(2)}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{day.soldToGrid.toFixed(2)}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-600">{formatCurrency(day.revenue)}</td>
