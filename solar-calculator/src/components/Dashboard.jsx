@@ -55,7 +55,6 @@ export const Dashboard = ({ results }) => {
                                 <YAxis />
                                 <Tooltip />
                                 <Legend />
-                                <Area type="monotone" dataKey="selfConsumed" stackId="1" stroke="#22c55e" fill="#22c55e" name={t('selfConsumed')} />
                                 <Area type="monotone" dataKey="soldToNeighbor" stackId="1" stroke="#3b82f6" fill="#3b82f6" name={t('toNeighbor')} />
                                 <Area type="monotone" dataKey="soldToGrid" stackId="1" stroke="#eab308" fill="#eab308" name={t('toGrid')} />
                             </AreaChart>
@@ -74,7 +73,6 @@ export const Dashboard = ({ results }) => {
                                 <Tooltip />
                                 <Legend />
                                 <Bar dataKey="revenue" fill="#10b981" name={t('revenue')} />
-                                <Bar dataKey="savings" fill="#059669" name={t('savings')} />
                                 <Bar dataKey="costOwner" fill="#ef4444" name={t('gridCost')} />
                             </BarChart>
                         </ResponsiveContainer>
