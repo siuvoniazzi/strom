@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from '../contexts/LanguageContext';
 
 export const ConfigurationForm = ({ availableMeters, onConfigChange }) => {
+    const { t } = useTranslation();
     const [config, setConfig] = useState({
         priceA: 0.10, // Solar to Neighbor
         priceB: 0.08, // Solar to Grid
@@ -94,11 +96,11 @@ export const ConfigurationForm = ({ availableMeters, onConfigChange }) => {
 
     return (
         <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-            <h2 className="text-xl font-semibold mb-4 text-gray-800">Configuration</h2>
+            <h2 className="text-xl font-semibold mb-4 text-gray-800">{t('configTitle')}</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Price A (Solar to Neighbor)</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">{t('priceALabel')}</label>
                     <div className="relative rounded-md shadow-sm">
                         <input
                             type="number"
@@ -109,13 +111,13 @@ export const ConfigurationForm = ({ availableMeters, onConfigChange }) => {
                             className="block w-full rounded-md border-gray-300 pl-3 pr-12 focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 border"
                         />
                         <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-                            <span className="text-gray-500 sm:text-sm">CHF</span>
+                            <span className="text-gray-500 sm:text-sm">{t('currency')}</span>
                         </div>
                     </div>
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Price B (Solar to Grid)</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">{t('priceBLabel')}</label>
                     <div className="relative rounded-md shadow-sm">
                         <input
                             type="number"
@@ -126,13 +128,13 @@ export const ConfigurationForm = ({ availableMeters, onConfigChange }) => {
                             className="block w-full rounded-md border-gray-300 pl-3 pr-12 focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 border"
                         />
                         <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-                            <span className="text-gray-500 sm:text-sm">CHF</span>
+                            <span className="text-gray-500 sm:text-sm">{t('currency')}</span>
                         </div>
                     </div>
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Price C (Grid Price)</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">{t('priceCLabel')}</label>
                     <div className="relative rounded-md shadow-sm">
                         <input
                             type="number"
@@ -143,7 +145,7 @@ export const ConfigurationForm = ({ availableMeters, onConfigChange }) => {
                             className="block w-full rounded-md border-gray-300 pl-3 pr-12 focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 border"
                         />
                         <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-                            <span className="text-gray-500 sm:text-sm">CHF</span>
+                            <span className="text-gray-500 sm:text-sm">{t('currency')}</span>
                         </div>
                     </div>
                 </div>
@@ -151,14 +153,14 @@ export const ConfigurationForm = ({ availableMeters, onConfigChange }) => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Production Meter</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">{t('productionMeterLabel')}</label>
                     <select
                         name="productionMeter"
                         value={config.productionMeter}
                         onChange={handleChange}
                         className="block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 border"
                     >
-                        <option value="">Select Meter</option>
+                        <option value="">{t('selectMeter')}</option>
                         {availableMeters.map(m => (
                             <option key={m} value={m}>{formatMeterLabel(m)}</option>
                         ))}
@@ -166,7 +168,7 @@ export const ConfigurationForm = ({ availableMeters, onConfigChange }) => {
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Owner Consumption Meter</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">{t('ownerMeterLabel')}</label>
                     <select
                         name="ownerMeter"
                         value={config.ownerMeter}
@@ -181,7 +183,7 @@ export const ConfigurationForm = ({ availableMeters, onConfigChange }) => {
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Neighbor Consumption Meter</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">{t('neighborMeterLabel')}</label>
                     <select
                         name="neighborMeter"
                         value={config.neighborMeter}

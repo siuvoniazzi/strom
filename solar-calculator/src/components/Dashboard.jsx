@@ -1,13 +1,15 @@
 import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, BarChart, Bar } from 'recharts';
 import { Sun, Home, Users, Zap, DollarSign } from 'lucide-react';
+import { useTranslation } from '../contexts/LanguageContext';
 
 export const Dashboard = ({ results }) => {
+    const { t } = useTranslation();
     if (!results) return null;
 
     const { daily, totals } = results;
 
-    const formatCurrency = (val) => `CHF ${(val || 0).toFixed(2)}`;
+    const formatCurrency = (val) => `${t('currency')} ${(val || 0).toFixed(2)}`;
     const formatEnergy = (val) => `${(val || 0).toFixed(1)} kWh`;
 
     return (
@@ -16,35 +18,35 @@ export const Dashboard = ({ results }) => {
             {/* Summary Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <SummaryCard
-                    title="Total Excess Production"
+                    title={t('totalExcessProduction')}
                     value={formatEnergy(totals.production)}
                     icon={<Sun className="w-6 h-6 text-yellow-500" />}
-                    subtext="Total solar energy generated"
+                    subtext={t('totalSolarGenerated')}
                 />
                 <SummaryCard
-                    title="Sold to Neighbor"
+                    title={t('soldToNeighbor')}
                     value={formatEnergy(totals.soldToNeighbor)}
                     icon={<Users className="w-6 h-6 text-blue-500" />}
-                    subtext={`Revenue: ${formatCurrency(totals.revenueFromNeighbor)}`}
+                    subtext={`${t('revenue')}: ${formatCurrency(totals.revenueFromNeighbor)}`}
                 />
                 <SummaryCard
-                    title="Sold to Grid"
+                    title={t('soldToGrid')}
                     value={formatEnergy(totals.soldToGrid)}
                     icon={<Zap className="w-6 h-6 text-orange-500" />}
-                    subtext={`Revenue: ${formatCurrency(totals.revenueFromGrid)}`}
+                    subtext={`${t('revenue')}: ${formatCurrency(totals.revenueFromGrid)}`}
                 />
                 <SummaryCard
-                    title="Total Revenue"
+                    title={t('totalRevenue')}
                     value={formatCurrency(totals.revenue)}
                     icon={<DollarSign className="w-6 h-6 text-emerald-600" />}
-                    subtext="Total earnings from sales"
+                    subtext={t('totalEarnings')}
                 />
             </div>
 
             {/* Charts */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div className="bg-white p-6 rounded-lg shadow-md">
-                    <h3 className="text-lg font-semibold mb-4">Daily Production Distribution</h3>
+                    <h3 className="text-lg font-semibold mb-4">{t('dailyProductionDistribution')}</h3>
                     <div className="h-80">
                         <ResponsiveContainer width="100%" height="100%">
                             <AreaChart data={daily}>
@@ -53,16 +55,16 @@ export const Dashboard = ({ results }) => {
                                 <YAxis />
                                 <Tooltip />
                                 <Legend />
-                                <Area type="monotone" dataKey="selfConsumed" stackId="1" stroke="#22c55e" fill="#22c55e" name="Self Consumed" />
-                                <Area type="monotone" dataKey="soldToNeighbor" stackId="1" stroke="#3b82f6" fill="#3b82f6" name="To Neighbor" />
-                                <Area type="monotone" dataKey="soldToGrid" stackId="1" stroke="#eab308" fill="#eab308" name="To Grid" />
+                                <Area type="monotone" dataKey="selfConsumed" stackId="1" stroke="#22c55e" fill="#22c55e" name={t('selfConsumed')} />
+                                <Area type="monotone" dataKey="soldToNeighbor" stackId="1" stroke="#3b82f6" fill="#3b82f6" name={t('toNeighbor')} />
+                                <Area type="monotone" dataKey="soldToGrid" stackId="1" stroke="#eab308" fill="#eab308" name={t('toGrid')} />
                             </AreaChart>
                         </ResponsiveContainer>
                     </div>
                 </div>
 
                 <div className="bg-white p-6 rounded-lg shadow-md">
-                    <h3 className="text-lg font-semibold mb-4">Financial Overview (Daily)</h3>
+                    <h3 className="text-lg font-semibold mb-4">{t('financialOverview')}</h3>
                     <div className="h-80">
                         <ResponsiveContainer width="100%" height="100%">
                             <BarChart data={daily}>
@@ -71,9 +73,9 @@ export const Dashboard = ({ results }) => {
                                 <YAxis />
                                 <Tooltip />
                                 <Legend />
-                                <Bar dataKey="revenue" fill="#10b981" name="Revenue" />
-                                <Bar dataKey="savings" fill="#059669" name="Savings" />
-                                <Bar dataKey="costOwner" fill="#ef4444" name="Grid Cost" />
+                                <Bar dataKey="revenue" fill="#10b981" name={t('revenue')} />
+                                <Bar dataKey="savings" fill="#059669" name={t('savings')} />
+                                <Bar dataKey="costOwner" fill="#ef4444" name={t('gridCost')} />
                             </BarChart>
                         </ResponsiveContainer>
                     </div>
@@ -83,18 +85,18 @@ export const Dashboard = ({ results }) => {
             {/* Detailed Stats Table */}
             <div className="bg-white rounded-lg shadow-md overflow-hidden">
                 <div className="px-6 py-4 border-b border-gray-200">
-                    <h3 className="text-lg font-semibold">Daily Breakdown</h3>
+                    <h3 className="text-lg font-semibold">{t('dailyBreakdown')}</h3>
                 </div>
                 <div className="overflow-x-auto">
                     <table className="min-w-full divide-y divide-gray-200">
                         <thead className="bg-gray-50">
                             <tr>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Production</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Self Consumed</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">To Neighbor</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">To Grid</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Revenue</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('date')}</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('production')}</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('selfConsumed')}</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('toNeighbor')}</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('toGrid')}</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('revenue')}</th>
                             </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
