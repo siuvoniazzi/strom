@@ -43,12 +43,26 @@ export const it = {
     toNeighbor: 'Al Vicino',
     toGrid: 'Alla Rete',
     savings: 'Risparmi',
-    gridCost: 'Costo della Rete',
+    gridCost: 'Costo Rete',
 
     // Dashboard - Table
-    dailyBreakdown: 'Ripartizione Giornaliera',
+    dailyBreakdown: 'Dettaglio Giornaliero',
     date: 'Data',
     production: 'Produzione',
+
+    // Neighbor Bill
+    downloadPdf: 'Scarica PDF',
+    electricityBill: 'Bolletta Elettrica',
+    neighborBillTitle: 'Rendiconto Vicino',
+    billSummary: 'Riepilogo Bolletta',
+    totalConsumption: 'Consumo Totale',
+    totalCost: 'Costo Totale',
+    costBreakdown: 'Dettaglio Costi',
+    solarEnergy: 'Energia Solare',
+    gridEnergy: 'Energia Rete',
+    billFooter: 'Questa bolletta è generata automaticamente in base ai dati del contatore forniti.',
+    viewDashboard: 'Cruscotto',
+    viewNeighborBill: 'Bolletta Vicino',
 
     // Currency
     currency: 'CHF'

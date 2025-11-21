@@ -43,12 +43,26 @@ export const fr = {
     toNeighbor: 'Au Voisin',
     toGrid: 'Au Réseau',
     savings: 'Économies',
-    gridCost: 'Coût du Réseau',
+    gridCost: 'Coût Réseau',
 
     // Dashboard - Table
-    dailyBreakdown: 'Répartition Quotidienne',
+    dailyBreakdown: 'Détail Quotidien',
     date: 'Date',
     production: 'Production',
+
+    // Neighbor Bill
+    downloadPdf: 'Télécharger PDF',
+    electricityBill: 'Facture d\'Électricité',
+    neighborBillTitle: 'Relevé Voisin',
+    billSummary: 'Résumé de la Facture',
+    totalConsumption: 'Consommation Totale',
+    totalCost: 'Coût Total',
+    costBreakdown: 'Détail des Coûts',
+    solarEnergy: 'Énergie Solaire',
+    gridEnergy: 'Énergie Réseau',
+    billFooter: 'Cette facture est générée automatiquement sur la base des données de comptage fournies.',
+    viewDashboard: 'Tableau de Bord',
+    viewNeighborBill: 'Facture Voisin',
 
     // Currency
     currency: 'CHF'

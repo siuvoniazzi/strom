@@ -2,8 +2,9 @@ import React, { useState, useMemo } from 'react';
 import { FileUpload } from './components/FileUpload';
 import { ConfigurationForm } from './components/ConfigurationForm';
 import { Dashboard } from './components/Dashboard';
+import { NeighborBill } from './components/NeighborBill';
 import { calculateSolarStats } from './lib/calculator';
-import { Sun, Globe } from 'lucide-react';
+import { Sun, Globe, LayoutDashboard, FileText } from 'lucide-react';
 import { useTranslation } from './contexts/LanguageContext';
 import { languages } from './translations';
 
@@ -12,6 +13,7 @@ function App() {
     const [parsedData, setParsedData] = useState(null);
     const [fileName, setFileName] = useState('');
     const [config, setConfig] = useState(null);
+    const [viewMode, setViewMode] = useState('dashboard'); // 'dashboard' or 'neighbor-bill'
 
     const availableMeters = useMemo(() => {
         if (!parsedData) return [];
@@ -109,7 +111,37 @@ function App() {
                         />
 
                         {results ? (
-                            <Dashboard results={results} />
+                            <div className="space-y-6">
+                                {/* View Toggle */}
+                                <div className="flex justify-center space-x-4">
+                                    <button
+                                        onClick={() => setViewMode('dashboard')}
+                                        className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${viewMode === 'dashboard'
+                                                ? 'bg-blue-600 text-white shadow-md'
+                                                : 'bg-white text-gray-600 hover:bg-gray-50'
+                                            }`}
+                                    >
+                                        <LayoutDashboard className="w-4 h-4" />
+                                        <span>{t('viewDashboard')}</span>
+                                    </button>
+                                    <button
+                                        onClick={() => setViewMode('neighbor-bill')}
+                                        className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${viewMode === 'neighbor-bill'
+                                                ? 'bg-blue-600 text-white shadow-md'
+                                                : 'bg-white text-gray-600 hover:bg-gray-50'
+                                            }`}
+                                    >
+                                        <FileText className="w-4 h-4" />
+                                        <span>{t('viewNeighborBill')}</span>
+                                    </button>
+                                </div>
+
+                                {viewMode === 'dashboard' ? (
+                                    <Dashboard results={results} />
+                                ) : (
+                                    <NeighborBill results={results} config={config} />
+                                )}
+                            </div>
                         ) : (
                             <div className="text-center py-12 bg-white rounded-lg shadow-sm">
                                 <p className="text-gray-500">{t('selectAllMeters')}</p>

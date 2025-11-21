@@ -41,7 +41,7 @@ export const de = {
     financialOverview: 'Finanzübersicht (Täglich)',
     selfConsumed: 'Eigenverbrauch',
     toNeighbor: 'An Nachbar',
-    toGrid: 'Ans Netz',
+    toGrid: 'Ins Netz',
     savings: 'Einsparungen',
     gridCost: 'Netzkosten',
 
@@ -49,6 +49,20 @@ export const de = {
     dailyBreakdown: 'Tägliche Aufschlüsselung',
     date: 'Datum',
     production: 'Produktion',
+
+    // Neighbor Bill
+    downloadPdf: 'PDF Herunterladen',
+    electricityBill: 'Stromrechnung',
+    neighborBillTitle: 'Abrechnung Nachbar',
+    billSummary: 'Rechnungsübersicht',
+    totalConsumption: 'Gesamtverbrauch',
+    totalCost: 'Gesamtkosten',
+    costBreakdown: 'Kostenaufschlüsselung',
+    solarEnergy: 'Solarenergie',
+    gridEnergy: 'Netzenergie',
+    billFooter: 'Diese Rechnung wurde automatisch basierend auf den Zählerdaten erstellt.',
+    viewDashboard: 'Dashboard',
+    viewNeighborBill: 'Rechnung Nachbar',
 
     // Currency
     currency: 'CHF'

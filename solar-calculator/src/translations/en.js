@@ -50,6 +50,20 @@ export const en = {
     date: 'Date',
     production: 'Production',
 
+    // Neighbor Bill
+    downloadPdf: 'Download PDF',
+    electricityBill: 'Electricity Bill',
+    neighborBillTitle: 'Neighbor Statement',
+    billSummary: 'Bill Summary',
+    totalConsumption: 'Total Consumption',
+    totalCost: 'Total Cost',
+    costBreakdown: 'Cost Breakdown',
+    solarEnergy: 'Solar Energy',
+    gridEnergy: 'Grid Energy',
+    billFooter: 'This bill is automatically generated based on the provided meter data.',
+    viewDashboard: 'Dashboard',
+    viewNeighborBill: 'Neighbor Bill',
+
     // Currency
     currency: 'CHF'
 };
