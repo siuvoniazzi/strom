@@ -13,6 +13,7 @@ export const NeighborBill = ({ results, config }) => {
     const { totals, daily } = results;
 
     const formatCurrency = (val) => `${t('currency')} ${(val || 0).toFixed(2)}`;
+    const formatPriceRate = (val) => `${t('currency')} ${(val || 0).toFixed(4)}`;
     const formatEnergy = (val) => `${(val || 0).toFixed(3)} kWh`;
 
     const handleDownloadPdf = async () => {
@@ -114,7 +115,7 @@ export const NeighborBill = ({ results, config }) => {
                                 <div>
                                     <p className="font-bold text-lg text-gray-900">{t('solarEnergy')}</p>
                                     <p className="text-gray-500">
-                                        {formatEnergy(totals.soldToNeighbor)} @ {formatCurrency(Number(config.priceA))} / kWh
+                                        {formatEnergy(totals.soldToNeighbor)} @ {formatPriceRate(Number(config.priceA))} / kWh
                                     </p>
                                 </div>
                             </div>
@@ -130,7 +131,7 @@ export const NeighborBill = ({ results, config }) => {
                                 <div>
                                     <p className="font-bold text-lg text-gray-900">{t('gridEnergy')}</p>
                                     <p className="text-gray-500">
-                                        {formatEnergy(totals.boughtFromGridNeighbor)} @ {formatCurrency(Number(config.priceC))} / kWh
+                                        {formatEnergy(totals.boughtFromGridNeighbor)} @ {formatPriceRate(Number(config.priceC))} / kWh
                                     </p>
                                 </div>
                             </div>
