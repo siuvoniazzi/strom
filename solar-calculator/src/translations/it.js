@@ -65,5 +65,7 @@ export const it = {
     viewNeighborBill: 'Bolletta Vicino',
 
     // Currency
-    currency: 'CHF'
+    currency: 'CHF',
+    pulledFromGrid: 'Acquisto Rete',
+    cost: 'Costo'
 };

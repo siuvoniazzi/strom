@@ -65,5 +65,7 @@ export const en = {
     viewNeighborBill: 'Neighbor Bill',
 
     // Currency
-    currency: 'CHF'
+    currency: 'CHF',
+    pulledFromGrid: 'Grid Purchase',
+    cost: 'Cost'
 };

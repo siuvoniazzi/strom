@@ -28,7 +28,11 @@ export const calculateSolarStats = (data, config) => {
         ...Object.keys(neighborMap)
     ]);
 
-    Array.from(allDates).sort().forEach(date => {
+    Array.from(allDates).sort((a, b) => {
+        const [dayA, monthA, yearA] = a.split('.').map(Number);
+        const [dayB, monthB, yearB] = b.split('.').map(Number);
+        return new Date(yearA, monthA - 1, dayA) - new Date(yearB, monthB - 1, dayB);
+    }).forEach(date => {
         const prodDay = productionMap[date] || new Array(96).fill(0);
         const ownerDay = ownerMap[date] || new Array(96).fill(0);
         const neighborDay = neighborMap[date] || new Array(96).fill(0);

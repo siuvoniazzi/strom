@@ -1,6 +1,6 @@
 import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, BarChart, Bar } from 'recharts';
-import { Sun, Home, Users, Zap, DollarSign } from 'lucide-react';
+import { Sun, Home, Users, Zap, DollarSign, ArrowDown } from 'lucide-react';
 import { useTranslation } from '../contexts/LanguageContext';
 
 export const Dashboard = ({ results }) => {
@@ -10,7 +10,7 @@ export const Dashboard = ({ results }) => {
     const { daily, totals } = results;
 
     const formatCurrency = (val) => `${t('currency')} ${(val || 0).toFixed(2)}`;
-    const formatEnergy = (val) => `${(val || 0).toFixed(1)} kWh`;
+    const formatEnergy = (val) => `${(val || 0).toFixed(3)} kWh`;
 
     return (
         <div className="space-y-8">
@@ -41,6 +41,12 @@ export const Dashboard = ({ results }) => {
                     icon={<DollarSign className="w-6 h-6 text-emerald-600" />}
                     subtext={t('totalEarnings')}
                 />
+                <SummaryCard
+                    title={t('pulledFromGrid')}
+                    value={formatEnergy(totals.boughtFromGridOwner)}
+                    icon={<ArrowDown className="w-6 h-6 text-red-500" />}
+                    subtext={`${t('cost')}: ${formatCurrency(totals.costOwner)}`}
+                />
             </div>
 
             {/* Charts */}
@@ -57,6 +63,7 @@ export const Dashboard = ({ results }) => {
                                 <Legend />
                                 <Area type="monotone" dataKey="soldToNeighbor" stackId="1" stroke="#3b82f6" fill="#3b82f6" name={t('toNeighbor')} />
                                 <Area type="monotone" dataKey="soldToGrid" stackId="1" stroke="#eab308" fill="#eab308" name={t('toGrid')} />
+                                <Area type="monotone" dataKey="boughtFromGridOwner" stackId="2" stroke="#ef4444" fill="#ef4444" name={t('pulledFromGrid')} />
                             </AreaChart>
                         </ResponsiveContainer>
                     </div>
@@ -66,15 +73,15 @@ export const Dashboard = ({ results }) => {
                     <h3 className="text-lg font-semibold mb-4">{t('financialOverview')}</h3>
                     <div className="h-80">
                         <ResponsiveContainer width="100%" height="100%">
-                            <BarChart data={daily}>
+                            <AreaChart data={daily}>
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis dataKey="date" />
                                 <YAxis />
-                                <Tooltip />
+                                <Tooltip formatter={(value) => formatCurrency(value)} />
                                 <Legend />
-                                <Bar dataKey="revenue" fill="#10b981" name={t('revenue')} />
-                                <Bar dataKey="costOwner" fill="#ef4444" name={t('gridCost')} />
-                            </BarChart>
+                                <Area type="monotone" dataKey="revenue" stackId="1" stroke="#10b981" fill="#10b981" name={t('revenue')} />
+                                <Area type="monotone" dataKey="costOwner" stackId="2" stroke="#ef4444" fill="#ef4444" name={t('gridCost')} />
+                            </AreaChart>
                         </ResponsiveContainer>
                     </div>
                 </div>
@@ -93,7 +100,9 @@ export const Dashboard = ({ results }) => {
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('production')}</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('toNeighbor')}</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('toGrid')}</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('pulledFromGrid')}</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('revenue')}</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('gridCost')}</th>
                             </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
@@ -103,7 +112,9 @@ export const Dashboard = ({ results }) => {
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{day.production.toFixed(2)}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{day.soldToNeighbor.toFixed(2)}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{day.soldToGrid.toFixed(2)}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{formatEnergy(day.boughtFromGridOwner)}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-600">{formatCurrency(day.revenue)}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-red-600">{formatCurrency(day.costOwner)}</td>
                                 </tr>
                             ))}
                         </tbody>

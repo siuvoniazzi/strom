@@ -13,7 +13,7 @@ export const NeighborBill = ({ results, config }) => {
     const { totals, daily } = results;
 
     const formatCurrency = (val) => `${t('currency')} ${(val || 0).toFixed(2)}`;
-    const formatEnergy = (val) => `${(val || 0).toFixed(1)} kWh`;
+    const formatEnergy = (val) => `${(val || 0).toFixed(3)} kWh`;
 
     const handleDownloadPdf = async () => {
         const container = containerRef.current;

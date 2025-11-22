@@ -65,5 +65,7 @@ export const de = {
     viewNeighborBill: 'Rechnung Nachbar',
 
     // Currency
-    currency: 'CHF'
+    currency: 'CHF',
+    pulledFromGrid: 'Netzbezug',
+    cost: 'Kosten'
 };
