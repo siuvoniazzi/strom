@@ -67,5 +67,6 @@ export const fr = {
     // Currency
     currency: 'CHF',
     pulledFromGrid: 'Achat Réseau',
-    cost: 'Coût'
+    cost: 'Coût',
+    netResult: 'Résultat Net'
 };

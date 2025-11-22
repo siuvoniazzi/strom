@@ -1,16 +1,27 @@
-import React from 'react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, BarChart, Bar } from 'recharts';
+import React, { useState } from 'react';
+import { ComposedChart, Area, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { Sun, Home, Users, Zap, DollarSign, ArrowDown } from 'lucide-react';
 import { useTranslation } from '../contexts/LanguageContext';
 
 export const Dashboard = ({ results }) => {
     const { t } = useTranslation();
+    const [hiddenSeries, setHiddenSeries] = useState([]);
+
     if (!results) return null;
 
     const { daily, totals } = results;
 
     const formatCurrency = (val) => `${t('currency')} ${(val || 0).toFixed(2)}`;
     const formatEnergy = (val) => `${(val || 0).toFixed(3)} kWh`;
+
+    const toggleSeries = (e) => {
+        const { dataKey } = e;
+        setHiddenSeries(prev =>
+            prev.includes(dataKey)
+                ? prev.filter(k => k !== dataKey)
+                : [...prev, dataKey]
+        );
+    };
 
     return (
         <div className="space-y-8">
@@ -55,16 +66,17 @@ export const Dashboard = ({ results }) => {
                     <h3 className="text-lg font-semibold mb-4">{t('dailyProductionDistribution')}</h3>
                     <div className="h-80">
                         <ResponsiveContainer width="100%" height="100%">
-                            <AreaChart data={daily}>
+                            <ComposedChart data={daily}>
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis dataKey="date" />
-                                <YAxis />
-                                <Tooltip />
-                                <Legend />
-                                <Area type="monotone" dataKey="soldToNeighbor" stackId="1" stroke="#3b82f6" fill="#3b82f6" name={t('toNeighbor')} />
-                                <Area type="monotone" dataKey="soldToGrid" stackId="1" stroke="#eab308" fill="#eab308" name={t('toGrid')} />
-                                <Area type="monotone" dataKey="boughtFromGridOwner" stackId="2" stroke="#ef4444" fill="#ef4444" name={t('pulledFromGrid')} />
-                            </AreaChart>
+                                <YAxis label={{ value: 'kWh', angle: -90, position: 'insideLeft' }} />
+                                <Tooltip formatter={(value) => `${(value || 0).toFixed(2)} kWh`} />
+                                <Legend onClick={toggleSeries} />
+                                <Area type="monotone" dataKey="soldToNeighbor" stackId="1" stroke="#3b82f6" fill="#3b82f6" name={t('toNeighbor')} hide={hiddenSeries.includes('soldToNeighbor')} />
+                                <Area type="monotone" dataKey="soldToGrid" stackId="1" stroke="#eab308" fill="#eab308" name={t('toGrid')} hide={hiddenSeries.includes('soldToGrid')} />
+                                <Area type="monotone" dataKey="boughtFromGridOwner" stackId="2" stroke="#ef4444" fill="#ef4444" name={t('pulledFromGrid')} hide={hiddenSeries.includes('boughtFromGridOwner')} />
+                                <Line type="monotone" dataKey="netEnergy" stroke="#8b5cf6" strokeWidth={3} dot={false} name={t('netResult')} hide={hiddenSeries.includes('netEnergy')} />
+                            </ComposedChart>
                         </ResponsiveContainer>
                     </div>
                 </div>
@@ -73,15 +85,16 @@ export const Dashboard = ({ results }) => {
                     <h3 className="text-lg font-semibold mb-4">{t('financialOverview')}</h3>
                     <div className="h-80">
                         <ResponsiveContainer width="100%" height="100%">
-                            <AreaChart data={daily}>
+                            <ComposedChart data={daily}>
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis dataKey="date" />
-                                <YAxis />
+                                <YAxis label={{ value: t('currency'), angle: -90, position: 'insideLeft' }} />
                                 <Tooltip formatter={(value) => formatCurrency(value)} />
-                                <Legend />
-                                <Area type="monotone" dataKey="revenue" stackId="1" stroke="#10b981" fill="#10b981" name={t('revenue')} />
-                                <Area type="monotone" dataKey="costOwner" stackId="2" stroke="#ef4444" fill="#ef4444" name={t('gridCost')} />
-                            </AreaChart>
+                                <Legend onClick={toggleSeries} />
+                                <Area type="monotone" dataKey="revenue" stackId="1" stroke="#10b981" fill="#10b981" name={t('revenue')} hide={hiddenSeries.includes('revenue')} />
+                                <Area type="monotone" dataKey="costOwner" stackId="2" stroke="#ef4444" fill="#ef4444" name={t('gridCost')} hide={hiddenSeries.includes('costOwner')} />
+                                <Line type="monotone" dataKey="netRevenue" stroke="#8b5cf6" strokeWidth={3} dot={false} name={t('netResult')} hide={hiddenSeries.includes('netRevenue')} />
+                            </ComposedChart>
                         </ResponsiveContainer>
                     </div>
                 </div>

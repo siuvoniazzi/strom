@@ -67,5 +67,6 @@ export const it = {
     // Currency
     currency: 'CHF',
     pulledFromGrid: 'Acquisto Rete',
-    cost: 'Costo'
+    cost: 'Costo',
+    netResult: 'Risultato Netto'
 };

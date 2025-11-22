@@ -101,6 +101,10 @@ export const calculateSolarStats = (data, config) => {
         dailyStats.costOwner = dailyStats.boughtFromGridOwner * config.priceC;
         dailyStats.costNeighbor = revenueFromNeighbor + (dailyStats.boughtFromGridNeighbor * config.priceC);
 
+        // Net Results
+        dailyStats.netEnergy = (dailyStats.soldToNeighbor + dailyStats.soldToGrid) - dailyStats.boughtFromGridOwner;
+        dailyStats.netRevenue = dailyStats.revenue - dailyStats.costOwner;
+
         results.push(dailyStats);
 
         // Global totals

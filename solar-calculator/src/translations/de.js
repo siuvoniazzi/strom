@@ -67,5 +67,6 @@ export const de = {
     // Currency
     currency: 'CHF',
     pulledFromGrid: 'Netzbezug',
-    cost: 'Kosten'
+    cost: 'Kosten',
+    netResult: 'Nettoergebnis'
 };
