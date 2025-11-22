@@ -69,5 +69,7 @@ export const de = {
     pulledFromGrid: 'Netzbezug',
     cost: 'Kosten',
     netResult: 'Nettoergebnis',
-    totalNeighborConsumption: 'Gesamtverbrauch Nachbar'
+    totalNeighborConsumption: 'Gesamtverbrauch Nachbar',
+    dailyConsumptionSource: 'Tägliche Verbrauchsherkunft',
+    dailyCost: 'Tägliche Kosten'
 };

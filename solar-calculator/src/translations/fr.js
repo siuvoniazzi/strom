@@ -69,5 +69,7 @@ export const fr = {
     pulledFromGrid: 'Achat Réseau',
     cost: 'Coût',
     netResult: 'Résultat Net',
-    totalNeighborConsumption: 'Consommation Totale Voisin'
+    totalNeighborConsumption: 'Consommation Totale Voisin',
+    dailyConsumptionSource: 'Source de Consommation Quotidienne',
+    dailyCost: 'Coût Quotidien'
 };

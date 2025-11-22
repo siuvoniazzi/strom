@@ -69,5 +69,7 @@ export const en = {
     pulledFromGrid: 'Grid Purchase',
     cost: 'Cost',
     netResult: 'Net Result',
-    totalNeighborConsumption: 'Total Neighbor Consumption'
+    totalNeighborConsumption: 'Total Neighbor Consumption',
+    dailyConsumptionSource: 'Daily Consumption Source',
+    dailyCost: 'Daily Cost'
 };

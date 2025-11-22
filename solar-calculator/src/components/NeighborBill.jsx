@@ -3,6 +3,7 @@ import { useTranslation } from '../contexts/LanguageContext';
 import { Download, User, Zap, Sun } from 'lucide-react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 export const NeighborBill = ({ results, config }) => {
     const { t } = useTranslation();
@@ -159,27 +160,37 @@ export const NeighborBill = ({ results, config }) => {
                         </div>
                     </div>
 
-                    <div className="overflow-hidden">
-                        <table className="min-w-full divide-y divide-gray-200">
-                            <thead className="bg-gray-50">
-                                <tr>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('date')}</th>
-                                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">{t('solarEnergy')} (kWh)</th>
-                                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">{t('gridEnergy')} (kWh)</th>
-                                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">{t('totalCost')}</th>
-                                </tr>
-                            </thead>
-                            <tbody className="bg-white divide-y divide-gray-200 text-sm">
-                                {daily.map((day, idx) => (
-                                    <tr key={idx} className={idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                                        <td className="px-6 py-3 whitespace-nowrap text-gray-900 font-medium">{day.date}</td>
-                                        <td className="px-6 py-3 whitespace-nowrap text-right text-gray-500">{day.soldToNeighbor.toFixed(2)}</td>
-                                        <td className="px-6 py-3 whitespace-nowrap text-right text-gray-500">{day.boughtFromGridNeighbor.toFixed(2)}</td>
-                                        <td className="px-6 py-3 whitespace-nowrap text-right font-bold text-gray-900">{formatCurrency(day.costNeighbor)}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                    <div className="space-y-12">
+                        {/* Chart 1: Consumption Source */}
+                        <div className="h-96">
+                            <h3 className="text-lg font-semibold mb-4 text-gray-700">{t('dailyConsumptionSource')}</h3>
+                            <ResponsiveContainer width="100%" height="100%">
+                                <BarChart data={daily}>
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="date" />
+                                    <YAxis label={{ value: 'kWh', angle: -90, position: 'insideLeft' }} />
+                                    <Tooltip formatter={(value) => `${(value || 0).toFixed(3)} kWh`} />
+                                    <Legend />
+                                    <Bar dataKey="soldToNeighbor" stackId="a" name={t('solarEnergy')} fill="#fbbf24" />
+                                    <Bar dataKey="boughtFromGridNeighbor" stackId="a" name={t('gridEnergy')} fill="#9ca3af" />
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </div>
+
+                        {/* Chart 2: Daily Cost */}
+                        <div className="h-96">
+                            <h3 className="text-lg font-semibold mb-4 text-gray-700">{t('dailyCost')}</h3>
+                            <ResponsiveContainer width="100%" height="100%">
+                                <BarChart data={daily}>
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="date" />
+                                    <YAxis label={{ value: t('currency'), angle: -90, position: 'insideLeft' }} />
+                                    <Tooltip formatter={(value) => formatCurrency(value)} />
+                                    <Legend />
+                                    <Bar dataKey="costNeighbor" name={t('totalCost')} fill="#2563eb" />
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </div>
                     </div>
                 </div>
             </div>
