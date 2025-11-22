@@ -15,9 +15,9 @@ export const de = {
 
     // Configuration
     configTitle: 'Konfiguration',
-    priceALabel: 'Preis A (Solar an Nachbar)',
-    priceBLabel: 'Preis B (Solar ans Netz)',
-    priceCLabel: 'Preis C (Netzpreis)',
+    priceALabel: 'Solar an Nachbar',
+    priceBLabel: 'Solar ins Netz',
+    priceCLabel: 'Netzpreis',
     productionMeterLabel: 'Produktionszähler',
     ownerMeterLabel: 'Eigentümer-Verbrauchszähler',
     neighborMeterLabel: 'Nachbar-Verbrauchszähler',
@@ -63,6 +63,7 @@ export const de = {
     billFooter: 'Diese Rechnung wurde automatisch basierend auf den Zählerdaten erstellt.',
     viewDashboard: 'Dashboard',
     viewNeighborBill: 'Rechnung Nachbar',
+    page: 'Seite',
 
     // Currency
     currency: 'CHF',

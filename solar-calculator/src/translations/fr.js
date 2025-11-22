@@ -15,9 +15,9 @@ export const fr = {
 
     // Configuration
     configTitle: 'Configuration',
-    priceALabel: 'Prix A (Solaire au Voisin)',
-    priceBLabel: 'Prix B (Solaire au Réseau)',
-    priceCLabel: 'Prix C (Prix du Réseau)',
+    priceALabel: 'Solaire au Voisin',
+    priceBLabel: 'Solaire au Réseau',
+    priceCLabel: 'Prix Réseau',
     productionMeterLabel: 'Compteur de Production',
     ownerMeterLabel: 'Compteur de Consommation Propriétaire',
     neighborMeterLabel: 'Compteur de Consommation Voisin',
@@ -63,6 +63,7 @@ export const fr = {
     billFooter: 'Cette facture est générée automatiquement sur la base des données de comptage fournies.',
     viewDashboard: 'Tableau de Bord',
     viewNeighborBill: 'Facture Voisin',
+    page: 'Page',
 
     // Currency
     currency: 'CHF',

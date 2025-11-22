@@ -15,9 +15,9 @@ export const en = {
 
     // Configuration
     configTitle: 'Configuration',
-    priceALabel: 'Price A (Solar to Neighbor)',
-    priceBLabel: 'Price B (Solar to Grid)',
-    priceCLabel: 'Price C (Grid Price)',
+    priceALabel: 'Solar to Neighbor',
+    priceBLabel: 'Solar to Grid',
+    priceCLabel: 'Grid Price',
     productionMeterLabel: 'Production Meter',
     ownerMeterLabel: 'Owner Consumption Meter',
     neighborMeterLabel: 'Neighbor Consumption Meter',
@@ -63,6 +63,7 @@ export const en = {
     billFooter: 'This bill is automatically generated based on the provided meter data.',
     viewDashboard: 'Dashboard',
     viewNeighborBill: 'Neighbor Bill',
+    page: 'Page',
 
     // Currency
     currency: 'CHF',

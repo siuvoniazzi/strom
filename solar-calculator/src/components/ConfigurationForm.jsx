@@ -175,7 +175,7 @@ export const ConfigurationForm = ({ availableMeters, onConfigChange }) => {
                         onChange={handleChange}
                         className="block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 border"
                     >
-                        <option value="">Select Meter</option>
+                        <option value="">{t('selectMeter')}</option>
                         {availableMeters.map(m => (
                             <option key={m} value={m}>{formatMeterLabel(m)}</option>
                         ))}
@@ -190,7 +190,7 @@ export const ConfigurationForm = ({ availableMeters, onConfigChange }) => {
                         onChange={handleChange}
                         className="block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 border"
                     >
-                        <option value="">Select Meter</option>
+                        <option value="">{t('selectMeter')}</option>
                         {availableMeters.map(m => (
                             <option key={m} value={m}>{formatMeterLabel(m)}</option>
                         ))}

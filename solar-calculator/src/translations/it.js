@@ -15,9 +15,9 @@ export const it = {
 
     // Configuration
     configTitle: 'Configurazione',
-    priceALabel: 'Prezzo A (Solare al Vicino)',
-    priceBLabel: 'Prezzo B (Solare alla Rete)',
-    priceCLabel: 'Prezzo C (Prezzo della Rete)',
+    priceALabel: 'Solare al Vicino',
+    priceBLabel: 'Solare alla Rete',
+    priceCLabel: 'Prezzo Rete',
     productionMeterLabel: 'Contatore di Produzione',
     ownerMeterLabel: 'Contatore Consumo Proprietario',
     neighborMeterLabel: 'Contatore Consumo Vicino',
@@ -63,6 +63,7 @@ export const it = {
     billFooter: 'Questa bolletta è generata automaticamente in base ai dati del contatore forniti.',
     viewDashboard: 'Cruscotto',
     viewNeighborBill: 'Bolletta Vicino',
+    page: 'Pagina',
 
     // Currency
     currency: 'CHF',

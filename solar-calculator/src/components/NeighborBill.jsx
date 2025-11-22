@@ -156,7 +156,7 @@ export const NeighborBill = ({ results, config }) => {
                     <div className="border-b border-gray-200 pb-6 mb-8">
                         <div className="flex justify-between items-center">
                             <h2 className="text-2xl font-bold text-gray-900">{t('dailyBreakdown')}</h2>
-                            <span className="text-gray-500">{t('neighborBillTitle')} - Page 2</span>
+                            <span className="text-gray-500">{t('neighborBillTitle')} - {t('page')} 2</span>
                         </div>
                     </div>
 
