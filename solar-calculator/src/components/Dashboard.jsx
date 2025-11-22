@@ -35,6 +35,12 @@ export const Dashboard = ({ results }) => {
                     subtext={t('totalSolarGenerated')}
                 />
                 <SummaryCard
+                    title={t('pulledFromGrid')}
+                    value={formatEnergy(totals.boughtFromGridOwner)}
+                    icon={<ArrowDown className="w-6 h-6 text-red-500" />}
+                    subtext={`${t('cost')}: ${formatCurrency(totals.costOwner)}`}
+                />
+                <SummaryCard
                     title={t('soldToNeighbor')}
                     value={formatEnergy(totals.soldToNeighbor)}
                     icon={<Users className="w-6 h-6 text-blue-500" />}
@@ -53,10 +59,10 @@ export const Dashboard = ({ results }) => {
                     subtext={t('totalEarnings')}
                 />
                 <SummaryCard
-                    title={t('pulledFromGrid')}
-                    value={formatEnergy(totals.boughtFromGridOwner)}
-                    icon={<ArrowDown className="w-6 h-6 text-red-500" />}
-                    subtext={`${t('cost')}: ${formatCurrency(totals.costOwner)}`}
+                    title={t('totalNeighborConsumption')}
+                    value={formatEnergy(totals.neighborUsage)}
+                    icon={<Home className="w-6 h-6 text-indigo-500" />}
+                    subtext={`${t('cost')}: ${formatCurrency(totals.costNeighbor)}`}
                 />
             </div>
 

@@ -68,5 +68,6 @@ export const de = {
     currency: 'CHF',
     pulledFromGrid: 'Netzbezug',
     cost: 'Kosten',
-    netResult: 'Nettoergebnis'
+    netResult: 'Nettoergebnis',
+    totalNeighborConsumption: 'Gesamtverbrauch Nachbar'
 };
